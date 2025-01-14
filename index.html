@@ -5,51 +5,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume - Srihari A</title>
     <style>
+        :root {
+            --main-bg-color: #f9f9f9;
+            --main-text-color: #333;
+            --header-bg-color: #007BFF;
+            --header-text-color: #fff;
+            --accent-color: #0056b3;
+        }
+
+        [data-theme="dark"] {
+            --main-bg-color: #1a1a2e;
+            --main-text-color: #f9f9f9;
+            --header-bg-color: #0f3460;
+            --header-text-color: #fff;
+            --accent-color: #e94560;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
+            background-color: var(--main-bg-color);
+            color: var(--main-text-color);
             line-height: 1.6;
         }
 
         header {
-            background-color: #007BFF;
-            color: white;
+            background: var(--header-bg-color);
+            color: var(--header-text-color);
             padding: 20px 10px;
             text-align: center;
+            position: relative;
         }
 
         header h1 {
             margin: 0;
+            font-size: 2.5em;
         }
- 
+
+        .toggle-theme {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--header-text-color);
+            color: var(--header-bg-color);
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 0.9em;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
         .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
             padding: 20px;
+            background: var(--main-bg-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .profile-img {
             display: block;
-            margin: 20px auto;
+            margin: 0 auto 20px;
             border-radius: 50%;
-            border: 5px solid #007BFF;
+            border: 5px solid var(--header-bg-color);
             width: 150px;
             height: 150px;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         h3 {
-            border-bottom: 2px solid #007BFF;
+            color: var(--header-bg-color);
+            font-size: 1.5em;
+            margin-top: 30px;
+            position: relative;
             padding-bottom: 5px;
-            margin-bottom: 15px;
-            color: #007BFF;
+        }
+
+        h3::after {
+            content: '';
+            width: 50px;
+            height: 3px;
+            background: var(--header-bg-color);
+            position: absolute;
+            bottom: 0;
+            left: 0;
         }
 
         ul, ol {
             margin-left: 20px;
+            padding-left: 0;
+            list-style-position: inside;
         }
 
         table {
@@ -60,21 +110,49 @@
 
         table th, table td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 12px;
             text-align: left;
         }
 
         table th {
-            background-color: #007BFF;
-            color: white;
+            background-color: var(--header-bg-color);
+            color: var(--header-text-color);
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        table tr:hover {
+            background-color: #eaf4ff;
         }
 
         footer {
             text-align: center;
-            padding: 10px;
-            background-color: #007BFF;
-            color: white;
+            padding: 10px 20px;
+            background: var(--header-bg-color);
+            color: var(--header-text-color);
             margin-top: 20px;
+            border-radius: 0 0 10px 10px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--header-bg-color);
+            color: var(--header-text-color);
+            border: none;
+            border-radius: 50%;
+            padding: 10px 15px;
+            font-size: 1.2em;
+            cursor: pointer;
+            display: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
@@ -82,6 +160,7 @@
 
     <header>
         <h1>Srihari A</h1>
+        <button class="toggle-theme">Toggle Theme</button>
     </header>
 
     <div class="container">
@@ -159,8 +238,30 @@
     </div>
 
     <footer>
-        <p>&copy; All rights reserved.</p>
+        <p>&copy; 2025 Srihari A. All rights reserved.</p>
     </footer>
+
+    <button class="scroll-top">↑</button>
+
+    <script>
+        const toggleThemeBtn = document.querySelector('.toggle-theme');
+        const scrollTopBtn = document.querySelector('.scroll-top');
+
+        // Toggle dark/light theme
+        toggleThemeBtn.addEventListener('click', () => {
+            document.body.dataset.theme = document.body.dataset.theme === 'dark' ? '' : 'dark';
+        });
+
+        // Show/hide scroll-to-top button
+        window.addEventListener('scroll', () => {
+            scrollTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+        });
+
+        // Scroll to top
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
 
 </body>
 </html>
